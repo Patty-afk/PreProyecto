@@ -23,9 +23,16 @@ class Zoologico:
     def registrar_visita(self, visita: Visita):
         self.Lista_visitas.append(visita)
         
+    def listar_visitas (self):
+        print("***Visitas registradas***")
+        for visita in self.Lista_visitas:
+            print(visita.mostrar_inform_visita())
+            
+        
     def mostrar_empleados(self):
         for empleado in self.Lista_empleados:
             print(empleado.mostrar_info())
+            
         
     def mostrar_visitantes(self):
         for visitante in self.Lista_visitantes:

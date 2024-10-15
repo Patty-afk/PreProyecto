@@ -26,7 +26,8 @@ class Menu:
             print("8.- Mostrar Empleados")
             print("9.- Mostrar Visitantes")
             print("10.- Mostrar Animales")
-            print("11.- salir")
+            print("11.- Mostrar visitas")
+            print("12.- salir")
 
         #agregue opciones al menu
 
@@ -183,5 +184,9 @@ class Menu:
 
 
             elif opcion == "11":
+                print("Visitas registradas")
+                self.zoologico.listar_visitas()
+            
+            elif opcion == "12":
                 print("\nHasta luego...")
                 break
