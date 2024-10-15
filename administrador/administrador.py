@@ -6,9 +6,9 @@ from datetime import datetime
 class Administrador(Empleado):
     
     
-    def __init__(self, nombre, apellido, fecha_nacimiento, fecha_ingreso, salario, horario, curp, rol):
-        super().__init__(nombre, apellido, fecha_nacimiento, fecha_ingreso, salario, horario, curp, rol)
+    def __init__(self, nombre, apellido, fecha_nacimiento, fecha_ingreso, salario, horario, curp):
+        super().__init__(nombre, apellido, fecha_nacimiento, fecha_ingreso, salario, horario, curp, 
+        rol = Rol.ADMINISTRADOR)
+
         
-        self.rol = Rol.ADMINISTRADOR
-        
-        # ¿Director = administrador?
+        # ¿Director = administrador? ci,creemos, realmente no sé

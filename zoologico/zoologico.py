@@ -1,4 +1,5 @@
 from empleado.empleado import Empleado
+from mantenimiento.mantenimiento import Mantenimiento
 from visitantes.visitantes import Visitante
 from visita.visita import Visita
 from animales.animales import Animal
@@ -14,7 +15,7 @@ class Zoologico:
 
 
     def registrar_empleado(self, empleado: Empleado):
-        self.lista_empleados.append(empleado)
+        self.Lista_empleados.append(empleado)
 
     def registrar_visitante(self, vistante: Visitante):
         self.Lista_vistantes.append(vistante)
@@ -25,7 +26,7 @@ class Zoologico:
     def mostrar_empleados(self):
         for empleado in self.Lista_empleados:
             print(empleado.mostrar_info())
-            
+        
     def mostrar_visitantes(self):
         for visitante in self.Lista_visitantes:
             print(visitante.mostrar_info())
