@@ -19,3 +19,8 @@ class Visitante:
     def mostrar_numero_visitas(self):
         info = f"\nNUMERO DE VISITAS = {self.numero_visitas}"
         return info
+    
+    def mostrar_info(self):
+        info = f"Nombre: {self.nombre} {self.apellido} Fecha De Nacimiento: {self.fecha_nacimiento} Curp: {self.curp} Numero de Visitas: {self.numero_visitas} Fecha de Registro: {self.fecha_registro}"
+        return info
+    

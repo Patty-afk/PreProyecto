@@ -21,4 +21,10 @@ class Empleado:
             self.curp = curp
             self.rol = Rol   
             
+        def mostrar_info(self):
+            info = f"-Nombre: {self.nombre} {self.apellido} Fecha Nacimiento: {self.fecha_nacimiento} Fecha de Ingreso: {self.fecha_ingreso} Salario: {self.salario} Horario: {self.horario} Curp: {self.curp} Rol: {self.rol.value}"
+            return info
+        
+        
+            
         

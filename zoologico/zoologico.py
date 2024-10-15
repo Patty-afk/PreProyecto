@@ -22,6 +22,17 @@ class Zoologico:
     def registrar_visita(self, visita: Visita):
         self.Lista_visitas.append(visita)
         
+    def mostrar_empleados(self):
+        for empleado in self.Lista_empleados:
+            print(empleado.mostrar_info())
+            
+    def mostrar_visitantes(self):
+        for visitante in self.Lista_visitantes:
+            print(visitante.mostrar_info())
+        
+    def mostrar_animales(self):
+        for animal in self.lista_animales:
+            print(animal.mostrar_info())
      
     #agregue la funcion agregar animal 
     def registrar_animal(self, animal:Animal):
@@ -31,6 +42,8 @@ class Zoologico:
         for visitante in self.Lista_vistantes:
             if curp == visitante.curp:
                 visitante.numero_visitas +=1
+            elif visitante.numero_visitas == 6:
+                visitante.numero_visitas = 0 
    
     def mostrar_numero_visitas(self):
         for visitante in self.Lista_vistantes:
