@@ -1,0 +1,3 @@
+
+class Enfermedades:
+    pass
