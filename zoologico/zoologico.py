@@ -2,6 +2,7 @@ from empleado.empleado import Empleado
 from visitantes.visitantes import Visitante
 from visita.visita import Visita
 from animales.animales import Animal
+from enfermedades.enfermedades import Enfermedades
 from typing import List
 
 class Zoologico:
@@ -9,6 +10,7 @@ class Zoologico:
     Lista_vistantes: List[Visitante] = []
     Lista_visitas: List[Visita] = []
     lista_animales: List[Animal] = []
+    lista_enfermedades: List[Enfermedades] = []
 
 
     def registrar_empleado(self, empleado: Empleado):
@@ -41,6 +43,15 @@ class Zoologico:
     def registrar_animal(self, animal:Animal):
         self.lista_animales.append(animal)
             
+    def generar_id_animal(self, especie:str, ano_nacimiento: int):
+        id = f"AN,{especie[:2].upper()},{ano_nacimiento},{len(self.lista_animales)+1}"
+        return id
+    
+    def registrar_enfermedad(self,id_animal):
+        for animal in self.lista_animales:
+            if animal.id == id_animal:
+                self.lista_enfermedades.append(animal)
+    
     #def contador_visitas(self,curp):
         # for visitante in self.Lista_vistantes:
         #     if curp == visitante.curp:

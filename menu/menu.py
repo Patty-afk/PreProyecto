@@ -7,7 +7,7 @@ from mantenimiento.mantenimiento import Mantenimiento
 from director.director import Director
 from animales.animales import Animal     
 from visita.visita import Visita
-
+from enfermedades.enfermedades import Enfermedades
 
 class Menu:
 
@@ -24,11 +24,12 @@ class Menu:
             print("5.- Registrar Visitante")
             print("6.- Registrar Visita")
             print("7.- Regitrar Animal")
-            print("8.- Mostrar Empleados")
-            print("9.- Mostrar Visitantes")
-            print("10.- Mostrar Animales")
-            print("11.-Mostrar menu precios")
-            print("12.- salir")
+            print("8.- Registrar Enfermedad")
+            print("9.- Mostrar Empleados")
+            print("10.- Mostrar Visitantes")
+            print("11.- Mostrar Animales")
+            print("12.- Mostrar menu precios")
+            print("13.- salir")
 
         #agregue opciones al menu
 
@@ -149,7 +150,7 @@ class Menu:
             
             elif opcion == "6":
                 print("Registrar Visita")
-                curp = input(f"Ingrese CURP de la persona: ")
+                curp = input("Ingrese CURP de la persona: ")
                 visitante_encontrado = False
                 
                 costo_total =0
@@ -223,11 +224,6 @@ class Menu:
                     self.zoologico.registrar_visita(visita)
         
                     print("¡Visita registrada correctamente!. Costo total: $", costo_total)      
-
-            
-            
-            
-            
                 
             elif opcion == "7":
                 print("Registrar Animal")
@@ -246,9 +242,15 @@ class Menu:
                 fecha_nacimiento = datetime(ano_nacimiento, mes_nacimiento, dia_nacimiento)
                 peso = float(input("Ingrese el peso: "))
                 frecuencia_alimentacion = ("Ingrese la frecuencia de la alimentacion: ")
-                vacunas = ("")
-                id = self.animales.generar_id(especie=especie, ano_nacimiento=ano_nacimiento)
-                #corregir id
+                print ("¿Cuenta con vacunas?")
+                opcion = int(input("1.-Si   2.-No\n"))
+                
+                if opcion == 1:
+                    vacunas = True
+                else: 
+                    vacunas = False 
+                
+                id = self.zoologico.generar_id_animal(especie=especie, ano_nacimiento=ano_nacimiento)
                 animal = Animal(id=id, tipo_animal=tipo, nombre=nombre, especie=especie, fecha_llegada=fecha_llegada,
                                 fecha_nacimiento=fecha_nacimiento, peso=peso, frecuecia_alimentacion=frecuencia_alimentacion,tipo_alimentacion=alimentacion, cuenta_vacunas=vacunas)
                 
@@ -257,19 +259,34 @@ class Menu:
                 print("\nRegistrado correctamente")
             
             elif opcion == "8":
+                print("Registrar Enfermedad")
+                id_animal = input("Ingrese el ID del animal: ")
+                enfermedad = input("Ingrese la enfermedad: ")
+                descripcion = input("Ingrese una descripcion de la enfermedad: ")
+                tratamiento = input("Ingrese el tratamiento: ")
+                veterinario = input("Ingrese el veterinario que lo atendio: ")
+                #revisar atributo veterinario
+                
+                enfermedad = Enfermedades(id_animal=id_animal, enfermedad=enfermedad, descripcion=descripcion, tratamiento=tratamiento, veterinario=veterinario)
+                
+                self.zoologico.registrar_enfermedad(enfermedad)
+                
+                print("\nRegistrado correctamente")
+            
+            elif opcion == "9":
                 print("------EMPLEADOS-----")
                 self.zoologico.mostrar_empleados()
                 
-            elif opcion == "9":
+            elif opcion == "10":
                 print("------VISITANTES------")
                 self.zoologico.mostrar_visitantes()
                 
-            elif opcion == "10":
+            elif opcion == "11":
                 print("-----ANIMALES-----")
                 self.zoologico.mostrar_animales()
 
 
-            elif opcion == "11":
+            elif opcion == "12":
                 print("""Bienvenido al Menu de precios 🤗
                       Adulto $100
                       Niños $50
@@ -279,7 +296,7 @@ class Menu:
                       
                       """)
             
-            elif opcion == "12":
+            elif opcion == "13":
                 print("\nHasta luego...")
                 break
             
