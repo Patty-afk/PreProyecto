@@ -7,7 +7,7 @@ from typing import List
 
 class Zoologico:
     Lista_empleados: List[Empleado] = []
-    Lista_vistantes: List[Visitante] = []
+    Lista_visitantes: List[Visitante] = []
     Lista_visitas: List[Visita] = []
     lista_animales: List[Animal] = []
 
@@ -17,8 +17,8 @@ class Zoologico:
     def registrar_empleado(self, empleado: Empleado):
         self.Lista_empleados.append(empleado)
 
-    def registrar_visitante(self, vistante: Visitante):
-        self.Lista_vistantes.append(vistante)
+    def registrar_visitante(self, visitante: Visitante):
+        self.Lista_visitantes.append(visitante)
 
     def registrar_visita(self, visita: Visita):
         self.Lista_visitas.append(visita)
@@ -49,7 +49,10 @@ class Zoologico:
     def mostrar_numero_visitas(self):
         for visitante in self.Lista_vistantes:
             print(visitante.mostrar_numero_visitas())
-        
+    
+    
+
+
     #  registrar cada vez que haya una visita en el zoológico 
     #  (el precio del boleto por persona es de $100 MXN por adulto y 
     #  $50 MXN por niño).

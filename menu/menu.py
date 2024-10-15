@@ -105,29 +105,32 @@ class Menu:
                 print("\nRegistrado correctamente")
 
             elif opcion == "5":
-                print("Registrar Vistante: ")
-                
-                #por default PARA PROBAR:
-                nombre_visitante= "ian"
-                apellido_visitante="cortes"
-                dia= 5
-                mes= 1
-                año= 2004
-                fecha_nacimiento_visitante=datetime(año, mes, dia)
-                curp_visitante=input("ingresa curp del visitante: ")
-                numero_visitas_visitante = 0
-                fecha_registro_visitante=datetime.now()
+                zoologico: Zoologico = Zoologico()
 
-                visitante=Visitante(nombre = nombre_visitante,
-                                        apellido = apellido_visitante, 
-                                        fecha_nacimiento= fecha_nacimiento_visitante, 
-                                        curp=curp_visitante, 
-                                        numero_visitas=numero_visitas_visitante, 
-                                        fecha_ingreso=fecha_registro_visitante)
+                cantidad_visitante = int(input("Cuantas personas quieres registrar: \n"))
+                for cantidad in range(cantidad_visitante):
 
-                Zoologico.registrar_visitante(visitante)
+                    print("Registrar Vistante NUMERO ", (cantidad+1), ": " )
+                    
+                    nombre_visitante= input("Ingresa Nombre del visitante: ")
+                    apellido_visitante=input("Ingresa Apellido del visitante: ")
+                    dia= int(input("Ingresa dia del visitante: "))
+                    mes= int(input("Ingresa mes del visitante: "))
+                    año= int(input("Ingresa año del visitante: "))
+                    fecha_nacimiento_visitante=datetime(año, mes, dia)
+                    curp_visitante=input("ingresa curp del visitante: ")
+                    numero_visitas_visitante = 0
+                    fecha_registro_visitante=datetime.now()
 
-                print("\nRegistrado correctamente")
+                    visitante = Visitante(nombre = nombre_visitante,
+                                            apellido = apellido_visitante, 
+                                            fecha_nacimiento= fecha_nacimiento_visitante, 
+                                            curp=curp_visitante, 
+                                            numero_visitas=numero_visitas_visitante, 
+                                            fecha_registro=fecha_registro_visitante)
+                    
+                    zoologico.registrar_visitante(visitante)
+                    print("\nRegistrado correctamente")
                 
             elif opcion == "6":
                 print("Registrar Visita: ")
