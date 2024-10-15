@@ -11,3 +11,13 @@ class Mantenimiento(Empleado):
     #Empleado a cargo:
     def __init__(self, nombre, apellido, fecha_nacimiento, fecha_ingreso, salario, horario, curp, rol):
         super().__init__(nombre, apellido, fecha_nacimiento, fecha_ingreso, salario, horario, curp, rol=Rol.MANTENIMIENTO)
+        
+class Proceso:
+    id_proceso: str
+    empleado: Mantenimiento
+    proceso: str
+    id_animal: str
+    fecha_proceso: datetime
+    observaciones: str
+    
+    

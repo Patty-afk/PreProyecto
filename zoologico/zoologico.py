@@ -3,6 +3,8 @@ from visitantes.visitantes import Visitante
 from visita.visita import Visita
 from animales.animales import Animal
 from enfermedades.enfermedades import Enfermedades
+from empleado.utils.roles import Rol
+from random import randint
 from typing import List
 
 class Zoologico:
@@ -46,6 +48,10 @@ class Zoologico:
     def generar_id_animal(self, especie:str, ano_nacimiento: int):
         id = f"AN,{especie[:2].upper()},{ano_nacimiento},{len(self.lista_animales)+1}"
         return id
+    
+    # def generar_id_empleado(self, curp: str, rol: Rol):
+    #     id = f"{curp[:2].upper()}{rol.value[-2:]}{randint(1,100)}"
+    #     return id
     
     def registrar_enfermedad(self,id_animal):
         for animal in self.lista_animales:
