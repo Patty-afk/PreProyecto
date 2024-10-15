@@ -5,7 +5,8 @@ from veterinario.veterinario import Veterinario
 from guia.guia import Guia
 from mantenimiento.mantenimiento import Mantenimiento
 from director.director import Director
-from animales.animales import Animal
+from animales.animales import Animal     
+from visita.visita import Visita
 
 
 class Menu:
@@ -26,7 +27,8 @@ class Menu:
             print("8.- Mostrar Empleados")
             print("9.- Mostrar Visitantes")
             print("10.- Mostrar Animales")
-            print("11.- salir")
+            print("11.-Mostrar menu precios")
+            print("12.- salir")
 
         #agregue opciones al menu
 
@@ -125,19 +127,107 @@ class Menu:
                                         numero_visitas=numero_visitas_visitante, 
                                         fecha_ingreso=fecha_registro_visitante)
 
-                Zoologico.registrar_visitante(visitante)
+                self.zoologico.registrar_visitante(visitante)
+                
+                
+                
+                
+                
 
                 print("\nRegistrado correctamente")
                 
-            elif opcion == "6":
-                print("Registrar Visita: ")
+            # elif opcion == "6":
+            #     print("Registrar Visita: ")
 
-                curp = input("ingresa curp del visitante: ")
-                Zoologico.contador_visitas(curp=curp)  
-                Zoologico.mostrar_numero_visitas()      
+            #     curp = input("ingresa curp del visitante: ")
+            #     self.zoologico.contador_visitas(curp=curp)  
+            #     self.zoologico.mostrar_numero_visitas()
+              
+                
+            #     print("\nRegistrado correctamente")
+            
+            
+            elif opcion == "6":
+                print("Registrar Visita")
+                curp = input(f"Ingrese CURP de la persona: ")
+                visitante_encontrado = False
+                
+                costo_total =0
+                costo_adulto =100
+                costo_nino = 50
+                lista_visitantes = []
+                
+                
+                
+                for visitante in self.zoologico.Lista_vistantes:
+                    if visitante.curp == curp:
+                        visitante.incrementar_visitas()
+                        print(f"Visitante {visitante.nombre} {visitante.apellido} encontrado. Visitas incrementadas.")
+                        visitante_encontrado = True
+
+                        if visitante.edad() < 12:
+                            costo_total += costo_nino
+                        else:
+                            costo_total += costo_adulto
+                            
+                        if visitante.numero_visitas >= 6:
+                            descuento = visitante.calcular_descuento()
+                            costo_total -= descuento
+                            print(f"Descuento aplicado para {visitante.nombre}: {descuento}")
+                    
+                        lista_visitantes.append(visitante)
+                        break
+                    
+                if not visitante_encontrado:
+                    num_personas = int(input("Ingresa el numero de visitantes: "))
+                   
             
                 
-                print("\nRegistrado correctamente")
+                    for i in range(num_personas):
+                        curp = input(f"Ingrese CURP de la persona {i + 1}: ")
+                        ano_nacimiento = int(input(f"Ingrese año de nacimiento de la persona {i + 1}: "))
+                        mes_nacimiento = int(input(f"Ingrese mes de nacimiento de la persona {i + 1}: "))
+                        dia_nacimiento = int(input(f"Ingrese día de nacimiento de la persona {i + 1}: "))
+            
+            
+                        fecha_nacimiento = datetime(ano_nacimiento, mes_nacimiento, dia_nacimiento)
+                        fecha_ingreso = datetime.now()
+                        numero_visitas = 0
+                        
+                        visitante = Visitante(nombre="", apellido="", fecha_nacimiento=fecha_nacimiento, curp=curp, numero_visitas=numero_visitas, fecha_ingreso=fecha_ingreso)
+                        lista_visitantes.append(visitante)
+                    
+                        if visitante.edad() < 12:
+                            costo_total += costo_nino
+                        else:
+                            costo_total += costo_adulto
+                        
+                    
+                        
+                    for visitante in lista_visitantes:
+                        visitante.incrementar_visitas()
+                        
+                    cantidad_ninos = sum(1 for visitante in lista_visitantes if visitante.edad() < 12) #para sumar chiquillos
+                    cantidad_adultos = num_personas - cantidad_ninos
+                
+                            
+                    visita = Visita(
+                        guia_acargo="Nombre del guía",  # Ajusta el nombre del guía según tu lógica
+                        cantidad_niños=cantidad_ninos,
+                        cantidad_adultos=cantidad_adultos,
+                        Lista_visitantes=lista_visitantes,
+                        costo_total=costo_total,
+                        fecha_visita=datetime.now()
+                    )
+        
+                    self.zoologico.registrar_visita(visita)
+        
+                    print("¡Visita registrada correctamente!. Costo total: $", costo_total)      
+
+            
+            
+            
+            
                 
             elif opcion == "7":
                 print("Registrar Animal")
@@ -180,5 +270,24 @@ class Menu:
 
 
             elif opcion == "11":
+                print("""Bienvenido al Menu de precios 🤗
+                      Adulto $100
+                      Niños $50
+                      
+                      *¡Recuenda que en tu 6 visita se te aplicara un -20% 
+                      de descuento en el precio regular de tu boleto!*
+                      
+                      """)
+            
+            elif opcion == "12":
                 print("\nHasta luego...")
                 break
+            
+            
+            
+            
+            
+            
+            
+            
+            

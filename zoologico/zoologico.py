@@ -11,16 +11,20 @@ class Zoologico:
     lista_animales: List[Animal] = []
 
 
-
-
     def registrar_empleado(self, empleado: Empleado):
         self.lista_empleados.append(empleado)
 
-    def registrar_visitante(self, vistante: Visitante):
-        self.Lista_vistantes.append(vistante)
+    def registrar_visitante(self, visitante: Visitante):
+        self.Lista_vistantes.append(visitante)
 
     def registrar_visita(self, visita: Visita):
         self.Lista_visitas.append(visita)
+        for visitante in visita.Lista_visitantes:
+            visitante.incrementar_visitas()
+            costo_final = visitante.calcular_descuento()
+            print("Visitante:", visitante.nombre, "Costo después de descuento:", costo_final)
+        
+        self.Lista_visitas.append(visita)      
         
     def mostrar_empleados(self):
         for empleado in self.Lista_empleados:
@@ -34,16 +38,20 @@ class Zoologico:
         for animal in self.lista_animales:
             print(animal.mostrar_info())
      
-    #agregue la funcion agregar animal 
     def registrar_animal(self, animal:Animal):
         self.lista_animales.append(animal)
             
-    def contador_visitas(self,curp):
-        for visitante in self.Lista_vistantes:
-            if curp == visitante.curp:
-                visitante.numero_visitas +=1
-            elif visitante.numero_visitas == 6:
-                visitante.numero_visitas = 0 
+    #def contador_visitas(self,curp):
+        # for visitante in self.Lista_vistantes:
+        #     if curp == visitante.curp:
+        #         visitante.numero_visitas +=1
+        #     elif visitante.numero_visitas == 6:
+        #         visitante.numero_visitas = 0 
+                
+    # def descuento_visitas(self, costo:float):
+    #     if self.visitas >0 and self.visitas % 5 ==0:
+    #         descuento = costo * 0.2
+    #         return costo-descuento
    
     def mostrar_numero_visitas(self):
         for visitante in self.Lista_vistantes:

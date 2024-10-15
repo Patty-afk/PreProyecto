@@ -21,7 +21,9 @@ class Visita:
         self.fecha_visita = fecha_visita
 
     #podemos agregar un def para agregar visitantes a la lista de aqui, un def identico al de Zoologico
+    
         
 
+        
 
 
