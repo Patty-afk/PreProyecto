@@ -256,5 +256,27 @@ class Zoologico:
         for animales in self.lista_animales:
             return animales
         return None
+    
+    def eliminar_empleado(self,curp):
+        for empleado in self.Lista_empleados:
+            if curp == empleado.curp:
+                self.Lista_empleados.remove(empleado)
+                print("Empleado eliminado:", empleado.nombre)
+                return
+        print("No se encuantra empleado")
 
-                
+    def eliminar_visitante(self, curp):
+        for visitante in self.Lista_visitantes:
+            if curp == visitante.curp:
+                self.Lista_visitantes.remove(visitante)
+                print("Visitante eliminado:", visitante.nombre)
+                return
+        print("No se ha encontrado visitante")
+    
+    def eliminar_animal(self, id):
+        for animal in self.lista_animales:
+            if id == animal.id:
+                self.lista_animales.remove(animal)
+                print("Animal eliminado:", animal.nombre,animal.especie)
+                return
+        print("No se ha encontrado animal")

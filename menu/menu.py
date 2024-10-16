@@ -16,7 +16,7 @@ class Menu:
     def menu(self):
 
         while True:
-            print("ZOOLOGICO")
+            print("\nZOOLOGICO")
             print("1.- Registrar Veterinario")
             print("2.- Registrar Guia")
             print("3.- Registrar empleado de mantenimiento")
@@ -29,7 +29,10 @@ class Menu:
             print("10.- Mostrar Visitantes")
             print("11.- Mostrar Animales")
             print("12.- Mostrar visitas")
-            print("13.- salir")
+            print("13.- Eliminar empleado")
+            print("14.- Eliminar visitante")
+            print("15.- Eliminar animal")
+            print("16.- salir")
 
         #agregue opciones al menu
 
@@ -212,5 +215,20 @@ class Menu:
                     self.zoologico.mostrar_visitas()
             
             elif opcion == "13":
+                print("Eliminar empleado")
+                curp = input("Ingresa curp del empleado a eliminar: ")
+                self.zoologico.eliminar_empleado(curp=curp)
+
+            elif opcion == "14":
+                print("Eliminar visitante")
+                curp = input("Ingresa curp del visitante a eliminar: ")
+                self.zoologico.eliminar_visitante(curp=curp)
+
+            elif opcion == "15":
+                print("Eliminar animal")
+                id = input("Ingresa Id del animal a eliminar: ")
+                self.zoologico.eliminar_animal(id=id)
+
+            elif opcion == "16":
                 print("\nHasta luego...")
                 break
