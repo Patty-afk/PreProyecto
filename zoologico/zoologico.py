@@ -15,7 +15,7 @@ class Zoologico:
     Lista_visitas: List[Visita] = []
     lista_animales: List[Animal] = []
     lista_guiaas : List[Guia] = []
-    
+    Lista_visitantes_de_visita: List[Visitante] = []    
     def __init__(self):
         
         empleado1 = Empleado (
@@ -26,7 +26,7 @@ class Zoologico:
             salario= 20.50,
             horario="7:30am-2:00pm",
             curp= "JAZ95",
-            rol=Guia
+            rol=Rol.GUIA
             )
         self.Lista_empleados.append(empleado1)
         
@@ -122,64 +122,80 @@ class Zoologico:
     #     for visitante in self.Lista_vistantes:
     #         print(visitante.mostrar_numero_visitas())s
     
+    # def descuento(self,numero_visitas):
+    #     if (numero_visitas-1) %  5 == 0:
+
+
     def datos_visita(self,curp):
         # curp = input("ingresa curp del guia: ")
         for empleado in self.Lista_empleados:
             if curp == empleado.curp:
                 if empleado.rol == Rol.GUIA:
-                    nombre = Guia.nombre
-                    apellido = Guia.apellido
-                    fecha_nacimiento = Guia.fecha_nacimiento
-                    fecha_ingreso = Guia.fecha_ingreso
-                    salario = Guia.salario
-                    horario = Guia.horario
-                    curp = Guia.curp
+                    nombre = empleado.nombre
+                    apellido = empleado.apellido
+                    fecha_nacimiento = empleado.fecha_nacimiento
+                    fecha_ingreso = empleado.fecha_ingreso
+                    salario = empleado.salario
+                    horario = empleado.horario
+                    curp = empleado.curp
 
                     guia_a_cargo = Guia(nombre, apellido, fecha_nacimiento, fecha_ingreso, salario, horario, curp)
         
         cantidad_visitantes_en_visita = int(input("Ingresa la cantidad de los visitanes: ")) 
         for cantidad in range(cantidad_visitantes_en_visita):
-            curp_visitantes = input("Ingresa curp de los visitante: ")
+            print("Ingresa curp del visitante numero ", cantidad+1, ": ")
+            curp_visitantes = input()
             for visitante in self.Lista_visitantes:
                 if curp_visitantes == visitante.curp:
                     nombre_visitante = visitante.nombre
                     apellido_visitante = visitante.apellido
                     fecha_nacimiento_visitante = visitante.fecha_nacimiento
-                    curp_visitante = visitante.curp
+                    curp_visitantes = visitante.curp
                     numero_visitas_visitante = visitante.numero_visitas
                     fecha_registro_visitante = visitante.fecha_registro
-
-                    visita.Lista_visitantes.append(visitante)
+                    
+                    visitante = Visitante(nombre=nombre_visitante, apellido = apellido_visitante, fecha_nacimiento = fecha_nacimiento_visitante, curp=curp_visitantes, numero_visitas=numero_visitas_visitante ,fecha_registro=fecha_registro_visitante)
+                    #visita.Lista_visitantes.append(visitante)
+                    self.Lista_visitantes_de_visita.append(visitante)
                     numero_visitas_visitante +=1
 
-                    print("Visitante registrado NUMERO ", (cantidad+1), ": " )
+                    print("Visitante registrado NUMERO ", (cantidad+1),"\n" )
                     
                     año_visitante = fecha_nacimiento_visitante.year
                     numero_de_niños = 0
                     numero_de_adultos = 0
-
+                    costo_boleto_adulto=0
+                    costo_boleto_niño=0
+                    costo_total=0
                     if año_visitante >= 2012: #comparacion de año 
                         #visitante es niño
-                        numero_de_niños =+ 1
+                        numero_de_niños += 1
+                        costo_boleto_niño = 50
+                        if (numero_visitas_visitante-1) % 5 == 0:
+                            costo_boleto_niño = costo_boleto_niño*0.8
+                            costo_boleto_niño += costo_boleto_niño
+                        else:
+                            costo_boleto_niño += costo_boleto_niño
                     else:
-                        numero_de_adultos =+1
+                        numero_de_adultos +=1
+                        costo_boleto_adulto= 100
+                        if (numero_visitas_visitante-1) % 5 == 0:
+                            costo_boleto_adulto = costo_boleto_adulto*0.8
+                            costo_boleto_adulto += costo_boleto_adulto
+                        else:
+                            costo_boleto_adulto += costo_boleto_adulto
+                        
                         #visitante es adulto
-                    
-                    if (numero_visitas_visitante-1) % 5 == 0:
-                        costo_total = numero_de_niños*50 + numero_de_adultos*100
-                        costo_descuento = costo_total* 0.8
-                        costo_descuento = costo_total
-                        print("Tu costo con descuento es: $", costo_descuento)
-                    else:
-                        print ("Tu costo final es: $"), costo_total
-        guia_a_cargo = guia_a_cargo
-        cantidad_niños= cantidad_niños 
-        cantidad_adultos= cantidad_adultos
-        Lista_visitantes_en_visita = visita.Lista_visitantes
-        costo_total= costo_total
+                    costo_total = costo_boleto_adulto+costo_boleto_niño      
+
+        # guia_a_cargo = visita.guia_acargo
+        # cantidad_niños= visita.cantidad_niños 
+        # cantidad_adultos= visita.cantidad_adultos
+        # self.Lista_visitantes_de_visita = visita.Lista_visitantes
+        # costo_total= visita.costo_total
         fecha_visita = datetime.now()
         
-        visita = Visita(guia_acargo=guia_a_cargo, cantidad_niños=cantidad_niños, cantidad_adultos=cantidad_adultos, Lista_visitantes=Lista_visitantes_en_visita,costo_total=costo_total,fecha_visita=fecha_visita)
+#        visita = Visita(guia_acargo=guia_a_cargo, cantidad_niños=cantidad_niños, cantidad_adultos=cantidad_adultos, Lista_visitantes=self.Lista_visitantes_de_visita, costo_total=costo_total,fecha_visita=fecha_visita)
           
                     
         
