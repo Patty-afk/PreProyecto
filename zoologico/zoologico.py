@@ -73,7 +73,7 @@ class Zoologico:
             apellido=  "Garcia",
             fecha_nacimiento = datetime (2019, 12, 20),
             curp = "KGAR12",
-            numero_visitas= 5,
+            numero_visitas= 10,
             fecha_registro=datetime (2024,1,5)
             
         )
@@ -141,9 +141,17 @@ class Zoologico:
 
                     guia_a_cargo = Guia(nombre, apellido, fecha_nacimiento, fecha_ingreso, salario, horario, curp)
         
+        numero_de_niños = 0
+        numero_de_adultos = 0
+        costo_boleto_adulto = 0
+        costo_boleto_niño = 0
+        costo_total = 0
+
         cantidad_visitantes_en_visita = int(input("Ingresa la cantidad de los visitanes: ")) 
+
+
         for cantidad in range(cantidad_visitantes_en_visita):
-            print("Ingresa curp del visitante numero ", cantidad+1, ": ")
+            print("Ingresa curp del visitante numero", cantidad+1, ": ")
             curp_visitantes = input()
             for visitante in self.Lista_visitantes:
                 if curp_visitantes == visitante.curp:
@@ -162,31 +170,30 @@ class Zoologico:
                     print("Visitante registrado NUMERO ", (cantidad+1),"\n" )
                     
                     año_visitante = fecha_nacimiento_visitante.year
-                    numero_de_niños = 0
-                    numero_de_adultos = 0
-                    costo_boleto_adulto=0
-                    costo_boleto_niño=0
-                    costo_total=0
+                    
                     if año_visitante >= 2012: #comparacion de año 
                         #visitante es niño
                         numero_de_niños += 1
                         costo_boleto_niño = 50
                         if (numero_visitas_visitante-1) % 5 == 0:
-                            costo_boleto_niño = costo_boleto_niño*0.8
-                            costo_boleto_niño += costo_boleto_niño
+                            costo_boleto_niño = numero_de_niños*costo_boleto_niño*0.8
+                            
                         else:
-                            costo_boleto_niño += costo_boleto_niño
+                            costo_boleto_niño = numero_de_niños*costo_boleto_niño
                     else:
-                        numero_de_adultos +=1
+                        numero_de_adultos += 1
                         costo_boleto_adulto= 100
                         if (numero_visitas_visitante-1) % 5 == 0:
-                            costo_boleto_adulto = costo_boleto_adulto*0.8
-                            costo_boleto_adulto += costo_boleto_adulto
+                            costo_boleto_adulto = numero_de_adultos*costo_boleto_adulto*0.8
                         else:
-                            costo_boleto_adulto += costo_boleto_adulto
+                            costo_boleto_adulto = numero_de_adultos*costo_boleto_adulto
                         
-                        #visitante es adulto
-                    costo_total = costo_boleto_adulto+costo_boleto_niño      
+        costo_total = costo_boleto_adulto+costo_boleto_niño
+        print("COSTO ADULTO: ", costo_boleto_adulto)      
+        print("COSTO NIÑO: ", costo_boleto_niño)      
+        print("COSTO TOTAL: ", costo_total)      
+        print("NIÑOS", numero_de_niños)      
+        print("ADULTOS", numero_de_adultos)      
 
         # guia_a_cargo = visita.guia_acargo
         # cantidad_niños= visita.cantidad_niños 
