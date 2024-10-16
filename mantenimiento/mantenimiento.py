@@ -17,3 +17,19 @@ class Mantenimiento(Empleado):
         info = f"-Nombre: {self.nombre} {self.apellido}, Fecha Nacimiento: {self.fecha_nacimiento}, Fecha de Ingreso: {self.fecha_ingreso}, Salario: {self.salario}, Horario: {self.horario}, Curp: {self.curp}, Rol: {self.rol.value}"
         return info
  
+ 
+class Proceso:
+    empleado: Empleado
+    id_animal: str
+    proceso: str
+    fecha: datetime
+    observaciones: str
+    
+    def __init__(self, empleado: Empleado, id_animal:str, proceso: str, fecha: datetime, observaciones: str):
+        self.empleado = empleado
+        self.id_animal = id_animal
+        self.fecha = fecha
+        self.proceso = proceso
+        self.observaciones = observaciones
+        
+        

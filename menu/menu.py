@@ -7,7 +7,7 @@ from mantenimiento.mantenimiento import Mantenimiento
 from director.director import Director
 from animales.animales import Animal
 from enfermedades.enfermedades import Enfermedades
-
+from mantenimiento.mantenimiento import Proceso
 
 class Menu:
 
@@ -202,9 +202,19 @@ class Menu:
             elif opcion == "8":
                 print("\nRegistrar mantenimiento")
                 
+                empleado = input("Ingrese la curp del empleado:")
+                id_animal = input("Ingrese el id del animal: ")
+                tipo_proceso = input("Ingrese el proceso a realizar: ")
+                dia_proceso = int(input("Ingrese el dia del proceso: "))
+                mes_proceso = int(input("Ingrese el mes del proceso: "))
+                ano_proceso = int(input("Ingrese el año del proceso: "))
+                fecha_proceso = datetime(ano_proceso, mes_proceso, dia_proceso)
+                observaciones = input("Ingrese observaciones si las hay: ")
                 
-                break
-            
+                proceso = Proceso(empleado=empleado, id_animal=id_animal, proceso=tipo_proceso, fecha=fecha_proceso, observaciones=observaciones)
+                
+                self.zoologico.registrar_proceso(proceso)
+                
             elif opcion == "9":
                 validacion = self.zoologico.validacion_empleados()
                 if validacion is None:

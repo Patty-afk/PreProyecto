@@ -10,6 +10,7 @@ from guia.guia import Guia
 from veterinario.veterinario import Veterinario
 from enfermedades.enfermedades import Enfermedades
 from director.director import Director
+from mantenimiento.mantenimiento import Proceso
 
 class Zoologico:
     Lista_empleados: List[Empleado] = []
@@ -19,6 +20,7 @@ class Zoologico:
     lista_guiaas : List[Guia] = []
     Lista_visitantes_de_visita: List[Visitante] = []  
     Lista_enfermedades_animal: List[Enfermedades] = []
+    Lista_proceso: List[Proceso] = [] 
      
     def __init__(self):
         
@@ -429,3 +431,11 @@ class Zoologico:
                 # horario: str
                 # curp: str
         print("No se encontro animal con ese Id")
+        
+        
+    def registrar_proceso(self,empleado, proceso):
+        if isinstance(empleado, Mantenimiento):
+            self.Lista_proceso.append(proceso)
+            print("Proceso Registrado Correctamente")
+        else:
+            print("No hay empleados de Mantenimiento")
