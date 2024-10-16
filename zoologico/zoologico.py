@@ -102,7 +102,17 @@ class Zoologico:
     def mostrar_visitantes(self):
         for visitante in self.Lista_visitantes:
             print(visitante.mostrar_info())
+            
         
+    def mostrar_visitas(self):
+        for visita in self.Lista_visitas:
+            print(visita.mostrar_inform_visita())
+
+            print("VISITANTES DE ESA VISITA")
+            for visitante in visita.Lista_visitantes:
+                print(visitante.mostrar_info())
+            print("\n")
+
     def mostrar_animales(self):
         for animal in self.lista_animales:
             print(animal.mostrar_info())
@@ -139,7 +149,8 @@ class Zoologico:
                     horario = empleado.horario
                     curp = empleado.curp
 
-                    guia_a_cargo = Guia(nombre, apellido, fecha_nacimiento, fecha_ingreso, salario, horario, curp)
+                    guia = Guia(nombre, apellido, fecha_nacimiento, fecha_ingreso, salario, horario, curp)
+                    guia_a_cargo = nombre
         
         numero_de_niños = 0
         numero_de_adultos = 0
@@ -196,12 +207,15 @@ class Zoologico:
         print("NIÑOS", numero_de_niños)      
         print("ADULTOS", numero_de_adultos)      
 
+        fecha_visita = datetime.now()
+        visita = Visita(guia_acargo=guia_a_cargo, cantidad_niños=numero_de_niños, cantidad_adultos=numero_de_adultos, Lista_visitantes=self.Lista_visitantes_de_visita, costo_total= costo_total, fecha_visita=fecha_visita) 
+        self.Lista_visitas.append(visita)
         # guia_a_cargo = visita.guia_acargo
         # cantidad_niños= visita.cantidad_niños 
         # cantidad_adultos= visita.cantidad_adultos
         # self.Lista_visitantes_de_visita = visita.Lista_visitantes
         # costo_total= visita.costo_total
-        fecha_visita = datetime.now()
+        
         
 #        visita = Visita(guia_acargo=guia_a_cargo, cantidad_niños=cantidad_niños, cantidad_adultos=cantidad_adultos, Lista_visitantes=self.Lista_visitantes_de_visita, costo_total=costo_total,fecha_visita=fecha_visita)
           

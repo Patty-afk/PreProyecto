@@ -23,10 +23,10 @@ class Visita:
 
 
     def mostrar_inform_visita(self):
-        infor= f" \n Guia a cargo: {self.guia_acargo}, cantidad niños: {self.cantidad_niños}, cantidad_adultos: {self.cantidad_adultos}, Costo total de la visita: {self.costo_total}, fecha de la visita: {self.fecha_visita}"    
+        infor= f" \nGuia a cargo: {self.guia_acargo}, cantidad niños: {self.cantidad_niños}, cantidad_adultos: {self.cantidad_adultos}, Costo total de la visita: {self.costo_total}, fecha de la visita: {self.fecha_visita}"    
         return infor
     #podemos agregar un def para agregar visitantes a la lista de aqui, un def identico al de Zoologico
-        
+
 
 
 

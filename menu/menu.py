@@ -142,7 +142,7 @@ class Menu:
                 
                 curp = input("ingresa curp del guia: ")
                 self.zoologico.datos_visita(curp)
-            
+                
                 
                 print("\nRegistrado correctamente")
                 
@@ -194,7 +194,7 @@ class Menu:
 
             elif opcion == "12":
                 print("Visitas registradas")
-                self.zoologico.listar_visitas()
+                self.zoologico.mostrar_visitas()
             
             elif opcion == "13":
                 print("\nHasta luego...")
