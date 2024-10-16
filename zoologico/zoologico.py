@@ -120,6 +120,15 @@ class Zoologico:
     def mostrar_animales(self):
         for animal in self.lista_animales:
             print(animal.mostrar_info())
+
+            if not animal.lista_enfermedades:
+                print("Este animal no tiene enfermedades")
+            else:
+                for enfermedad in animal.lista_enfermedades:
+                    print("Enfermedad: ",enfermedad.mostrar_info())
+                    
+                
+            print("\n")
             # validacion = self.validacion_enfermedades
             # if validacion is None:
             #     print("El animal no tiene enfermedades")
@@ -131,9 +140,26 @@ class Zoologico:
             
 
     #agregue la funcion agregar animal 
-    def registrar_animal(self, animal:Animal):
+    def registrar_animal(self, tipo,nombre,especie,fecha_llegada,ano,fecha_nacimiento,alimentacion,frecuencia_alimentacion, peso, vacunas, validar_enfermedades):
+        ano_nacimiento = ano
+        if validar_enfermedades == "SI":
+            cantidad_enfermedades = int(input("Ingrese cantidad de enfermedades: "))
+            for cantidad in range(cantidad_enfermedades):
+                nombre_enfermedades = input("Ingrese nombre de enfermedades: ")
+                enfermedades = Enfermedades(nombre= nombre_enfermedades)
+                self.Lista_enfermedades_animal.append(enfermedades)
+        else:
+            #lista de enfermedades esta vacia
+            print("animal sano")
+            self.Lista_enfermedades_animal = []
+        
+        id_animal = self.generar_id(especie=especie, ano_nacimiento=ano_nacimiento)
+        animal = Animal(id=id_animal, tipo_animal=tipo, nombre=nombre, especie=especie, fecha_llegada=fecha_llegada,
+                        fecha_nacimiento=fecha_nacimiento, tipo_alimentacion=alimentacion, frecuecia_alimentacion=frecuencia_alimentacion, peso=peso,lista_enfermedades=self.Lista_enfermedades_animal, cuenta_vacunas=vacunas)
         self.lista_animales.append(animal)
-        #animal.lista_enfermedades=[]
+        print("Se animal registrado correctamente ")
+        #self.lista_animales.append(animal)
+        self.Lista_enfermedades_animal=[]
             
     # def contador_visitas(self,curp):
     #     for visitante in self.Lista_vistantes:

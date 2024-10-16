@@ -150,6 +150,7 @@ class Menu:
             elif opcion == "7":
                 print("Registrar Animal")
                 
+                
                 tipo = input("Ingrese el tipo: ")
                 nombre = input("Ingrese el nombre: ")
                 especie = input("Ingrese la especie: ")
@@ -168,23 +169,24 @@ class Menu:
                 vacunas = input("Cuenta con vacunas: SI-NO: ")
                 validar_enfermedades = input("Tiene enfermedades: SI-NO: ")
                 
-                if validar_enfermedades == "SI":
-                    cantidad_enfermedades = int(input("Ingrese cantidad de enfermedades: "))
-                    for cantidad in range(cantidad_enfermedades):
-                        nombre_enfermedades = input("Ingrese nombre de enfermedades: ")
-                        enfermedades = Enfermedades(nombre= nombre_enfermedades)
-                        self.zoologico.Lista_enfermedades_animal.append(enfermedades)
-                else:
-                    #lista de enfermedades esta vacia
-                    print("animal sano")
-                    #self.zoologico.Lista_enfermedades_animal = []
+                self.zoologico.registrar_animal(tipo=tipo, nombre=nombre, especie=especie, fecha_llegada=fecha_llegada, ano=ano_nacimiento, fecha_nacimiento=fecha_nacimiento, alimentacion=alimentacion, frecuencia_alimentacion=frecuencia_alimentacion, peso=peso, vacunas=vacunas, validar_enfermedades=validar_enfermedades)
+                # if validar_enfermedades == "SI":
+                #     cantidad_enfermedades = int(input("Ingrese cantidad de enfermedades: "))
+                #     for cantidad in range(cantidad_enfermedades):
+                #         nombre_enfermedades = input("Ingrese nombre de enfermedades: ")
+                #         enfermedades = Enfermedades(nombre= nombre_enfermedades)
+                #         self.zoologico.Lista_enfermedades_animal.append(enfermedades)
+                # else:
+                #     #lista de enfermedades esta vacia
+                #     print("animal sano")
+                #     #self.zoologico.Lista_enfermedades_animal = []
                 
-                #corregir id
-                id_animal = self.zoologico.generar_id(especie=especie, ano_nacimiento=ano_nacimiento)
-                animal = Animal(id=id_animal, tipo_animal=tipo, nombre=nombre, especie=especie, fecha_llegada=fecha_llegada,
-                                fecha_nacimiento=fecha_nacimiento, tipo_alimentacion=alimentacion, frecuecia_alimentacion=frecuencia_alimentacion, peso=peso,lista_enfermedades=self.zoologico.Lista_enfermedades_animal, cuenta_vacunas=vacunas)
+                # #corregir id
+                # id_animal = self.zoologico.generar_id(especie=especie, ano_nacimiento=ano_nacimiento)
+                # animal = Animal(id=id_animal, tipo_animal=tipo, nombre=nombre, especie=especie, fecha_llegada=fecha_llegada,
+                #                 fecha_nacimiento=fecha_nacimiento, tipo_alimentacion=alimentacion, frecuecia_alimentacion=frecuencia_alimentacion, peso=peso,lista_enfermedades=self.zoologico.Lista_enfermedades_animal, cuenta_vacunas=vacunas)
                 
-                self.zoologico.registrar_animal(animal=animal)
+                # self.zoologico.registrar_animal(animal=animal)
 
                 print("\nRegistrado correctamente")
                 
@@ -217,14 +219,6 @@ class Menu:
                 else:
                     print("-----ANIMALES-----")
                     self.zoologico.mostrar_animales()
-                    validacion = self.zoologico.validacion_enfermedades()
-                    if validacion is None:
-                        print("El animal no tiene enfermedades ")
-                    else:
-                        print("Enfermedades del animal:")
-                        for enfermedad in self.zoologico.Lista_enfermedades_animal:
-                            print(enfermedad.mostrar_info())
-                            print("\n")
 
             elif opcion == "12":
                 validacion = self.zoologico.validacion_visitas()
