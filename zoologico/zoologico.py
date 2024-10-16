@@ -9,6 +9,7 @@ from empleado.utils.roles import Rol
 from guia.guia import Guia
 from veterinario.veterinario import Veterinario
 from enfermedades.enfermedades import Enfermedades
+from director.director import Director
 
 class Zoologico:
     Lista_empleados: List[Empleado] = []
@@ -20,6 +21,17 @@ class Zoologico:
     Lista_enfermedades_animal: List[Enfermedades] = []
      
     def __init__(self):
+        
+        director = Director(
+            nombre= "Admin",
+            apellido= "uno",
+            fecha_nacimiento= datetime(2000,9,7),
+            fecha_ingreso= datetime.now(),
+            horario= "8:00am - 8:00pm",
+            curp= "ADMIN123",
+            salario= 50.89
+        )
+        self.Lista_empleados.append(director)
         
         empleado1 = Empleado (
             nombre="Juan",
@@ -84,6 +96,13 @@ class Zoologico:
         self.Lista_visitantes.append(visitante2)
             
         
+    def validar_incio_sesion(self, usuario:str, contrasena:str):
+            for empleado in self.Lista_empleados:
+                if empleado.nombre == usuario:
+                    if empleado.curp == contrasena:
+                        return usuario
+            return None
+    
     
     def registrar_empleado(self, empleado: Empleado):
         self.Lista_empleados.append(empleado)

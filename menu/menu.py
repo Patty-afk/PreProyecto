@@ -13,6 +13,23 @@ class Menu:
 
     zoologico: Zoologico = Zoologico()
 
+    def login(self):
+        intentos = 0
+        while intentos < 5:
+            print("""----BIENVENIDO----
+                  Inicia sesion para continuar:
+                  """)
+            usuario = input("Ingresa tu usuario: ")
+            contrasena = input("Ingresa tu contraseña: ")
+            
+            user = self.zoologico.validar_incio_sesion(usuario=usuario, contrasena=contrasena)
+            
+            if user is None:
+                intentos =+ 1
+            else: 
+                self.menu()
+
+
     def menu(self):
 
         while True:
