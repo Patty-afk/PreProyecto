@@ -73,7 +73,7 @@ class Zoologico:
             apellido=  "Garcia",
             fecha_nacimiento = datetime (2019, 12, 20),
             curp = "KGAR12",
-            numero_visitas= 10,
+            numero_visitas= 0,
             fecha_registro=datetime (2024,1,5)
             
         )
@@ -175,7 +175,8 @@ class Zoologico:
                         #visitante es niño
                         numero_de_niños += 1
                         costo_boleto_niño = 50
-                        if (numero_visitas_visitante-1) % 5 == 0:
+                        
+                        if numero_visitas_visitante != 1 and (numero_visitas_visitante-1) % 5 == 0:
                             costo_boleto_niño = numero_de_niños*costo_boleto_niño*0.8
                             
                         else:
