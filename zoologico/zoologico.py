@@ -91,9 +91,6 @@ class Zoologico:
     def registrar_visitante(self, visitante: Visitante):
         self.Lista_visitantes.append(visitante)
 
-    # def registrar_visita(self, curp):
-    #     self.Lista_visitas.append(visita)
-        
     def mostrar_empleados(self):
         for empleado in self.Lista_empleados:
             print(empleado.mostrar_info())
@@ -112,11 +109,6 @@ class Zoologico:
                 print(visitante.mostrar_info())
             print("\n")
         
-    def validacion_enfermedades(self):
-        for enfermedad in self.Lista_enfermedades_animal:
-            return enfermedad
-        return None
-    
     def mostrar_animales(self):
         for animal in self.lista_animales:
             print(animal.mostrar_info())
@@ -129,16 +121,7 @@ class Zoologico:
                     
                 
             print("\n")
-            # validacion = self.validacion_enfermedades
-            # if validacion is None:
-            #     print("El animal no tiene enfermedades")
-            # else: 
-            #     print("Enfermedades del animal:")
-            #     for enfermedad in self.Lista_enfermedades_animal:
-            #         print(enfermedad.mostrar_info())
-            #         print("\n")
             
-
     #agregue la funcion agregar animal 
     def registrar_animal(self, tipo,nombre,especie,fecha_llegada,ano,fecha_nacimiento,alimentacion,frecuencia_alimentacion, peso, vacunas, validar_enfermedades):
         ano_nacimiento = ano
