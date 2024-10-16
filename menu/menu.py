@@ -19,13 +19,16 @@ class Menu:
             print("""----BIENVENIDO----
                   Inicia sesion para continuar:
                   """)
-            usuario = input("Ingresa tu usuario: ")
+            curp = input("Ingresa tu Curp del empleado: ")
             contrasena = input("Ingresa tu contraseña: ")
             
-            user = self.zoologico.validar_incio_sesion(usuario=usuario, contrasena=contrasena)
+            user = self.zoologico.validar_incio_sesion(curp=curp, contrasena=contrasena)
             
             if user is None:
-                intentos =+ 1
+                intentos += 1
+                print("Incorrecto, numero intentos ", intentos)
+                if intentos == 5:
+                    print("\nSISTEMA BLOQUEADO\n")
             else: 
                 self.menu()
 
@@ -49,7 +52,10 @@ class Menu:
             print("13.- Eliminar empleado")
             print("14.- Eliminar visitante")
             print("15.- Eliminar animal")
-            print("16.- salir")
+            print("16.- Modificar empleado")
+            print("17.- Modificar visitante")
+            print("18.- Modificar animal")
+            print("19.- salir")
 
         #agregue opciones al menu
 
@@ -245,7 +251,41 @@ class Menu:
                 print("Eliminar animal")
                 id = input("Ingresa Id del animal a eliminar: ")
                 self.zoologico.eliminar_animal(id=id)
-
+            
             elif opcion == "16":
+                print("Modificar empleado")
+                validacion = self.zoologico.validacion_empleados()
+                if validacion is None:
+                    print("No hay empleados registrados\n")
+                else:
+                    print("------EMPLEADOS-----")
+                    self.zoologico.mostrar_empleados()
+                    nueva_curp = input("Ingresa curp del empleado para modificar datos: ")
+                    self.zoologico.modificar_empleado(curp= nueva_curp)
+                
+            
+            elif opcion == "17":
+                print("Modificar Visitante")
+                validacion = self.zoologico.validacion_visitantes()
+                if validacion is None:
+                    print("No hay empleados registrados\n")
+                else:
+                    print("------EMPLEADOS-----")
+                    self.zoologico.mostrar_visitantes()
+                    nueva_curp = input("Ingresa curp del empleado para modificar datos: ")
+                    self.zoologico.modificar_visitante(curp= nueva_curp)
+
+            elif opcion == "18":
+                print("Modificar Animales")
+                validacion = self.zoologico.validacion_animales()
+                if validacion is None:
+                    print("No se ha registrado un animal\n")
+                else:
+                    print("-----ANIMALES-----")
+                    self.zoologico.mostrar_animales()
+                    nueva_curp = input("Ingresa curp del empleado para modificar datos: ")
+                    self.zoologico.modificar_animal(id = nueva_curp)
+
+            elif opcion == "19":
                 print("\nHasta luego...")
                 break

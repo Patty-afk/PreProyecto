@@ -23,13 +23,16 @@ class Zoologico:
     def __init__(self):
         
         director = Director(
+            usuario= "Admin",
+            contrasena=123, 
             nombre= "Admin",
             apellido= "uno",
             fecha_nacimiento= datetime(2000,9,7),
             fecha_ingreso= datetime.now(),
             horario= "8:00am - 8:00pm",
             curp= "ADMIN123",
-            salario= 50.89
+            salario= 100.00
+            #contrasena = "123"
         )
         self.Lista_empleados.append(director)
         
@@ -96,11 +99,12 @@ class Zoologico:
         self.Lista_visitantes.append(visitante2)
             
         
-    def validar_incio_sesion(self, usuario:str, contrasena:str):
+    def validar_incio_sesion(self, curp, contrasena):
             for empleado in self.Lista_empleados:
-                if empleado.nombre == usuario:
-                    if empleado.curp == contrasena:
-                        return usuario
+                if empleado.curp == curp:
+                    if empleado.rol == Rol.DIRECTOR:
+                        if contrasena == "123":
+                                return empleado
             return None
     
     
@@ -242,8 +246,8 @@ class Zoologico:
         print("COSTO ADULTO: ", costo_boleto_adulto)      
         print("COSTO NIÑO: ", costo_boleto_niño)      
         print("COSTO TOTAL: ", costo_total)      
-        print("NIÑOS", numero_de_niños)      
-        print("ADULTOS", numero_de_adultos)      
+        print("NIÑOS:", numero_de_niños)      
+        print("ADULTOS:", numero_de_adultos)      
 
         fecha_visita = datetime.now()
         visita = Visita(guia_acargo=guia_a_cargo, cantidad_niños=numero_de_niños, cantidad_adultos=numero_de_adultos, Lista_visitantes=self.Lista_visitantes_de_visita, costo_total= costo_total, fecha_visita=fecha_visita) 
@@ -299,3 +303,129 @@ class Zoologico:
                 print("Animal eliminado:", animal.nombre,animal.especie)
                 return
         print("No se ha encontrado animal")
+
+#----------------
+    def modificar_empleado(self, curp):
+        for empleado in self.Lista_empleados:
+            if curp == empleado.curp:
+                print("Dato a reemplazar: ")
+                print("1.- Salario")
+                print("2.- Horario")
+                print("3.- Curp")
+                numero_dato = input("Ingresa numero: ")
+                if numero_dato == "1":
+                    dato_nuevo = float(input("Nuevo salario: "))
+                    empleado.salario = dato_nuevo
+                    return
+                    
+                elif numero_dato == "2":
+                    dato_nuevo = input("Nuevo Horario: ")
+                    empleado.horario = dato_nuevo
+                    return
+                
+                elif numero_dato == "3":
+                    dato_nuevo = input("Nueva curp: ")
+                    empleado.curp = dato_nuevo
+                    return
+                else: 
+                    print("No ingresaste opcion valida")
+                    return
+
+                # salario: float
+                # horario: str
+                # curp: str
+        print("no se encontro empleado con esa curp")
+
+    def modificar_visitante(self, curp):
+        for visitante in self.Lista_visitantes:
+            if curp == visitante.curp:
+                print("Dato a reemplazar: ")
+                print("1.- Nombre")
+                print("2.- Apellido")
+                print("3.- Curp")
+                numero_dato = input("Ingresa numero: ")
+                if numero_dato == "1":
+                    dato_nuevo = input("Nuevo Nombre: ")
+                    visitante.salario = dato_nuevo
+                    return
+                    
+                elif numero_dato == "2":
+                    dato_nuevo = input("Nuevo Apellido: ")
+                    visitante.horario = dato_nuevo
+                    return
+                
+                elif numero_dato == "3":
+                    dato_nuevo = input("Nueva Curp: ")
+                    visitante.curp = dato_nuevo
+                    return
+                else: 
+                    print("No ingresaste opcion valida")
+                    return
+                # salario: float
+                # horario: str
+                # curp: str
+        print("No se encontro visitante con esa curp")
+
+    def modificar_animal(self, id):
+        for animal in self.lista_animales:
+            if id == animal.id:
+                print("Dato a reemplazar: ")
+                print("1.- Tipo ")
+                print("2.- Nombre")
+                print("3.- Id")
+                print("4.- Tipo de alimentacion")
+                print("5.- Frecuencia de alimentacion")
+                print("6.- Peso")
+                print("7.- Vacunas")
+                # tipo_animal: str
+                # id: str
+                # nombre: str
+                # especie: str
+                # fecha_llegada:datetime
+                # fecha_nacimiento_animal: datetime
+                # tipo_alimentacion: str
+                # frecuencia_alimentacio: str
+                # peso:float
+                # lista_enfermedades: List[Enfermedades] = []
+                # cuenta_vacunas:str
+                numero_dato = input("Ingresa numero: ")
+                if numero_dato == "1":
+                    dato_nuevo = input("Nuevo Tipo: ")
+                    animal.tipo_animal = dato_nuevo
+                    return
+                    
+                elif numero_dato == "2":
+                    dato_nuevo = input("Nuevo Nombre: ")
+                    animal.nombre = dato_nuevo
+                    return
+                
+                elif numero_dato == "3":
+                    dato_nuevo = input("Nueva Id: ")
+                    animal.id = dato_nuevo
+                    return
+                
+                elif numero_dato == "4":
+                    dato_nuevo = input("Nueva Tipo de alimentacion: ")
+                    animal.tipo_alimentacion = dato_nuevo
+                    return
+                
+                elif numero_dato == "5":
+                    dato_nuevo = input("Nueva Frecuencia de alimentacion: ")
+                    animal.frecuencia_alimentacio = dato_nuevo
+                    return
+                
+                elif numero_dato == "6":
+                    dato_nuevo = float(input("Nueva : Peso"))
+                    animal.peso = dato_nuevo
+                    return
+                elif numero_dato == "7":
+                    dato_nuevo = input("Nueva Vacunas: ")
+                    animal.cuenta_vacunas = dato_nuevo
+                    return
+                else: 
+                    print("No ingresaste opcion valida")
+                    return
+                # salario: float
+                # horario: str
+                # curp: str
+        print("No se encontro animal con ese Id")

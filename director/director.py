@@ -8,9 +8,12 @@ class Director(Empleado):
     usuario: str
     contrasena: str
     
-    def __init__(self, nombre, apellido, fecha_nacimiento, fecha_ingreso, salario, horario, curp):
+    def __init__(self, usuario,contrasena, nombre, apellido, fecha_nacimiento, fecha_ingreso, salario, horario, curp):
         super().__init__(nombre, apellido, fecha_nacimiento, fecha_ingreso, salario, horario, curp, 
+        
         rol = Rol.DIRECTOR)
+        self.usuario = usuario
+        self.contrasena = contrasena
         
 
     def mostrar_info(self):
