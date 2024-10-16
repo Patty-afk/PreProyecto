@@ -8,6 +8,7 @@ from typing import List
 from empleado.utils.roles import Rol
 from guia.guia import Guia
 from veterinario.veterinario import Veterinario
+from enfermedades.enfermedades import Enfermedades
 
 class Zoologico:
     Lista_empleados: List[Empleado] = []
@@ -15,7 +16,9 @@ class Zoologico:
     Lista_visitas: List[Visita] = []
     lista_animales: List[Animal] = []
     lista_guiaas : List[Guia] = []
-    Lista_visitantes_de_visita: List[Visitante] = []    
+    Lista_visitantes_de_visita: List[Visitante] = []  
+    Lista_enfermedades_animal: List[Enfermedades] = []
+     
     def __init__(self):
         
         empleado1 = Empleado (
@@ -39,7 +42,7 @@ class Zoologico:
             salario= 21.50,
             horario="2:00pm-7:00pm",
             curp= "DAG99",
-            rol=Veterinario
+            rol=Rol.VETERINARIO
             )
         self.Lista_empleados.append(empleado2)
         
@@ -51,7 +54,7 @@ class Zoologico:
             salario= 50.50,
             horario="7:30am-8:00pm",
             curp= "DEAN90",
-            rol=Mantenimiento
+            rol=Rol.MANTENIMIENTO
             )
         self.Lista_empleados.append(empleado3)
     
@@ -91,9 +94,6 @@ class Zoologico:
     # def registrar_visita(self, curp):
     #     self.Lista_visitas.append(visita)
         
-
-          
-        
     def mostrar_empleados(self):
         for empleado in self.Lista_empleados:
             print(empleado.mostrar_info())
@@ -103,7 +103,6 @@ class Zoologico:
         for visitante in self.Lista_visitantes:
             print(visitante.mostrar_info())
             
-        
     def mostrar_visitas(self):
         for visita in self.Lista_visitas:
             print(visita.mostrar_inform_visita())
@@ -112,14 +111,29 @@ class Zoologico:
             for visitante in visita.Lista_visitantes:
                 print(visitante.mostrar_info())
             print("\n")
-
+        
+    def validacion_enfermedades(self):
+        for enfermedad in self.Lista_enfermedades_animal:
+            return enfermedad
+        return None
+    
     def mostrar_animales(self):
         for animal in self.lista_animales:
             print(animal.mostrar_info())
-     
+            # validacion = self.validacion_enfermedades
+            # if validacion is None:
+            #     print("El animal no tiene enfermedades")
+            # else: 
+            #     print("Enfermedades del animal:")
+            #     for enfermedad in self.Lista_enfermedades_animal:
+            #         print(enfermedad.mostrar_info())
+            #         print("\n")
+            
+
     #agregue la funcion agregar animal 
     def registrar_animal(self, animal:Animal):
         self.lista_animales.append(animal)
+        #animal.lista_enfermedades=[]
             
     # def contador_visitas(self,curp):
     #     for visitante in self.Lista_vistantes:
@@ -131,10 +145,6 @@ class Zoologico:
     # def mostrar_numero_visitas(self):
     #     for visitante in self.Lista_vistantes:
     #         print(visitante.mostrar_numero_visitas())s
-    
-    # def descuento(self,numero_visitas):
-    #     if (numero_visitas-1) %  5 == 0:
-
 
     def datos_visita(self,curp):
         # curp = input("ingresa curp del guia: ")
@@ -210,30 +220,32 @@ class Zoologico:
         fecha_visita = datetime.now()
         visita = Visita(guia_acargo=guia_a_cargo, cantidad_niños=numero_de_niños, cantidad_adultos=numero_de_adultos, Lista_visitantes=self.Lista_visitantes_de_visita, costo_total= costo_total, fecha_visita=fecha_visita) 
         self.Lista_visitas.append(visita)
-        # guia_a_cargo = visita.guia_acargo
-        # cantidad_niños= visita.cantidad_niños 
-        # cantidad_adultos= visita.cantidad_adultos
-        # self.Lista_visitantes_de_visita = visita.Lista_visitantes
-        # costo_total= visita.costo_total
+        self.Lista_visitantes_de_visita = []
         
+
+    
+    def generar_id(self, especie:str, ano_nacimiento: int):
+        id = f"AN,{especie[2:]},{ano_nacimiento}"
+        return id
         
-#        visita = Visita(guia_acargo=guia_a_cargo, cantidad_niños=cantidad_niños, cantidad_adultos=cantidad_adultos, Lista_visitantes=self.Lista_visitantes_de_visita, costo_total=costo_total,fecha_visita=fecha_visita)
-          
-                    
-        
- #               guia_de_visita= input("Ingresa curp del guia asignado: ")#guia
-                #cantidad niños
-                #cantidad adultos
-                #listado
-                #costo total
-                #fecha visita     
+    def validacion_visitas(self):
+        for visita in self.Lista_visitas:
+            return visita
+        return None    
+    
+    def validacion_empleados(self):
+        for empleado in self.Lista_empleados:
+            return empleado
+        return None
+    
+    def validacion_visitantes(self):
+        for visitante in self.Lista_visitantes:
+            return visitante
+        return None
+    
+    def validacion_animales(self):
+        for animales in self.lista_animales:
+            return animales
+        return None
 
-
-    #  registrar cada vez que haya una visita en el zoológico 
-    #  (el precio del boleto por persona es de $100 MXN por adulto y 
-    #  $50 MXN por niño).
-
-
-    #  registra una visita, el atributo de número de visitas del 
-    # cliente debe de aumentar en 1, ya que cada 5 visitas, el visitante 
-    # tendrá un descuento del 20% en su boleto.
+                

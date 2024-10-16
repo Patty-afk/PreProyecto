@@ -17,7 +17,7 @@ class Empleado:
             self.fecha_nacimiento = fecha_nacimiento
             self.fecha_ingreso = fecha_ingreso
             self.salario = salario
-            self.horario = str
+            self.horario = horario
             self.curp = curp
             self.rol = rol  
             

@@ -6,6 +6,7 @@ from guia.guia import Guia
 from mantenimiento.mantenimiento import Mantenimiento
 from director.director import Director
 from animales.animales import Animal
+from enfermedades.enfermedades import Enfermedades
 
 
 class Menu:
@@ -156,21 +157,35 @@ class Menu:
                 mes = int(input("Ingrese el mes de llegada: "))
                 ano = int(input("Ingrese el año de llegada: "))
                 fecha_llegada = datetime(ano,mes,dia)
-                alimentacion = input("Ingrese el tipo de alimentacion: ")
                 dia_nacimiento = int(input("Ingrese el dia de nacimiento: "))
                 mes_nacimiento = int(input("Ingrese el mes de nacimietno: "))
                 ano_nacimiento = int(input("Ingrese el año de nacimiento: ")) 
                 fecha_nacimiento = datetime(ano_nacimiento, mes_nacimiento, dia_nacimiento)
-                peso = float(input("Ingrese el peso: "))
-                frecuencia_alimentacion = ("Ingrese la frecuencia de la alimentacion: ")
-                vacunas = ("")
-                id = self.animales.generar_id(especie=especie, ano_nacimiento=ano_nacimiento)
+                alimentacion = input("Ingrese el tipo de alimentacion: ")
+                frecuencia_alimentacion = input("Ingrese la frecuencia de la alimentacion: ")
+                peso = float(input("Ingrese el peso en kg: "))
+                #lista de enfermedades
+                vacunas = input("Cuenta con vacunas: SI-NO: ")
+                validar_enfermedades = input("Tiene enfermedades: SI-NO: ")
+                
+                if validar_enfermedades == "SI":
+                    cantidad_enfermedades = int(input("Ingrese cantidad de enfermedades: "))
+                    for cantidad in range(cantidad_enfermedades):
+                        nombre_enfermedades = input("Ingrese nombre de enfermedades: ")
+                        enfermedades = Enfermedades(nombre= nombre_enfermedades)
+                        self.zoologico.Lista_enfermedades_animal.append(enfermedades)
+                else:
+                    #lista de enfermedades esta vacia
+                    print("animal sano")
+                    #self.zoologico.Lista_enfermedades_animal = []
+                
                 #corregir id
-                animal = Animal(id=id, tipo_animal=tipo, nombre=nombre, especie=especie, fecha_llegada=fecha_llegada,
-                                fecha_nacimiento=fecha_nacimiento, peso=peso, frecuecia_alimentacion=frecuencia_alimentacion,tipo_alimentacion=alimentacion, cuenta_vacunas=vacunas)
+                id_animal = self.zoologico.generar_id(especie=especie, ano_nacimiento=ano_nacimiento)
+                animal = Animal(id=id_animal, tipo_animal=tipo, nombre=nombre, especie=especie, fecha_llegada=fecha_llegada,
+                                fecha_nacimiento=fecha_nacimiento, tipo_alimentacion=alimentacion, frecuecia_alimentacion=frecuencia_alimentacion, peso=peso,lista_enfermedades=self.zoologico.Lista_enfermedades_animal, cuenta_vacunas=vacunas)
                 
                 self.zoologico.registrar_animal(animal=animal)
-                
+
                 print("\nRegistrado correctamente")
                 
             elif opcion == "8":
@@ -180,21 +195,44 @@ class Menu:
                 break
             
             elif opcion == "9":
-                print("------EMPLEADOS-----")
-                self.zoologico.mostrar_empleados()
+                validacion = self.zoologico.validacion_empleados()
+                if validacion is None:
+                    print("No hay empleados registrados\n")
+                else:
+                    print("------EMPLEADOS-----")
+                    self.zoologico.mostrar_empleados()
                 
             elif opcion == "10":
-                print("------VISITANTES------")
-                self.zoologico.mostrar_visitantes()
+                validacion = self.zoologico.validacion_visitantes()
+                if validacion is None:
+                    print("No hay visitantes registrados\n")
+                else:
+                    print("------VISITANTES------")
+                    self.zoologico.mostrar_visitantes()
                 
             elif opcion == "11":
-                print("-----ANIMALES-----")
-                self.zoologico.mostrar_animales()
-
+                validacion = self.zoologico.validacion_animales()
+                if validacion is None:
+                    print("No se ha registrado un animal\n")
+                else:
+                    print("-----ANIMALES-----")
+                    self.zoologico.mostrar_animales()
+                    validacion = self.zoologico.validacion_enfermedades()
+                    if validacion is None:
+                        print("El animal no tiene enfermedades ")
+                    else:
+                        print("Enfermedades del animal:")
+                        for enfermedad in self.zoologico.Lista_enfermedades_animal:
+                            print(enfermedad.mostrar_info())
+                            print("\n")
 
             elif opcion == "12":
-                print("Visitas registradas")
-                self.zoologico.mostrar_visitas()
+                validacion = self.zoologico.validacion_visitas()
+                if validacion is None:
+                    print("No hay visitas registradas\n")
+                else:
+                    print("\nVisitas registradas")
+                    self.zoologico.mostrar_visitas()
             
             elif opcion == "13":
                 print("\nHasta luego...")
