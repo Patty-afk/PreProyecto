@@ -22,12 +22,13 @@ class Menu:
             print("4.- Registrar Director")
             print("5.- Registrar Visitante")
             print("6.- Registrar Visita")
-            print("7.- Regitrar Animal")
-            print("8.- Mostrar Empleados")
-            print("9.- Mostrar Visitantes")
-            print("10.- Mostrar Animales")
-            print("11.- Mostrar visitas")
-            print("12.- salir")
+            print("7.- Registrar Animal")
+            print("8.- Registrar Mantenimiento")
+            print("9.- Mostrar Empleados")
+            print("10.- Mostrar Visitantes")
+            print("11.- Mostrar Animales")
+            print("12.- Mostrar visitas")
+            print("13.- salir")
 
         #agregue opciones al menu
 
@@ -115,9 +116,9 @@ class Menu:
                     
                     nombre_visitante= input("Ingresa Nombre del visitante: ")
                     apellido_visitante=input("Ingresa Apellido del visitante: ")
-                    dia= int(input("Ingresa dia del visitante: "))
-                    mes= int(input("Ingresa mes del visitante: "))
-                    año= int(input("Ingresa año del visitante: "))
+                    dia= int(input("Ingresa dia de nacimiento del visitante: "))
+                    mes= int(input("Ingresa mes de nacimiento del visitante: "))
+                    año= int(input("Ingresa mes de nacimiento año del visitante: "))
                     fecha_nacimiento_visitante=datetime(año, mes, dia)
                     curp_visitante=input("ingresa curp del visitante: ")
                     numero_visitas_visitante = 0
@@ -130,15 +131,17 @@ class Menu:
                                             numero_visitas=numero_visitas_visitante, 
                                             fecha_registro=fecha_registro_visitante)
                     
-                    zoologico.registrar_visitante(visitante)
+                    self.zoologico.registrar_visitante(visitante)
                     print("\nRegistrado correctamente")
                 
             elif opcion == "6":
-                print("Registrar Visita: ")
-
-                curp = input("ingresa curp del visitante: ")
-                Zoologico.contador_visitas(curp=curp)  
-                Zoologico.mostrar_numero_visitas()      
+                
+                zoologico: Zoologico = Zoologico
+                
+                print("Registrar Visita ")
+                
+                curp = input("ingresa curp del guia: ")
+                self.zoologico.datos_visita(curp)
             
                 
                 print("\nRegistrado correctamente")
@@ -169,24 +172,30 @@ class Menu:
                 self.zoologico.registrar_animal(animal=animal)
                 
                 print("\nRegistrado correctamente")
-            
+                
             elif opcion == "8":
+                print("\nRegistrar mantenimiento")
+                
+                
+                break
+            
+            elif opcion == "9":
                 print("------EMPLEADOS-----")
                 self.zoologico.mostrar_empleados()
                 
-            elif opcion == "9":
+            elif opcion == "10":
                 print("------VISITANTES------")
                 self.zoologico.mostrar_visitantes()
                 
-            elif opcion == "10":
+            elif opcion == "11":
                 print("-----ANIMALES-----")
                 self.zoologico.mostrar_animales()
 
 
-            elif opcion == "11":
+            elif opcion == "12":
                 print("Visitas registradas")
                 self.zoologico.listar_visitas()
             
-            elif opcion == "12":
+            elif opcion == "13":
                 print("\nHasta luego...")
                 break
