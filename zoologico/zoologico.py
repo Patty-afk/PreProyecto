@@ -10,7 +10,7 @@ from guia.guia import Guia
 from veterinario.veterinario import Veterinario
 from enfermedades.enfermedades import Enfermedades
 from director.director import Director
-from mantenimiento.mantenimiento import Proceso
+from proceso.proceso import Proceso
 
 class Zoologico:
     Lista_empleados: List[Empleado] = []
@@ -38,7 +38,7 @@ class Zoologico:
         )
         self.Lista_empleados.append(director)
         
-        empleado1 = Empleado (
+        empleado1 = Guia (
             nombre="Juan",
             apellido= "Alcaraz",
             fecha_nacimiento= datetime(1995,5,9),
@@ -46,12 +46,12 @@ class Zoologico:
             salario= 20.50,
             horario="7:30am-2:00pm",
             curp= "JAZ95",
-            rol=Rol.GUIA
+            #rol=Rol.GUIA
             )
         self.Lista_empleados.append(empleado1)
         
         
-        empleado2 = Empleado (
+        empleado2 = Veterinario (
             nombre="Daniel",
             apellido= "Guzman",
             fecha_nacimiento= datetime(1999,3,12),
@@ -59,11 +59,11 @@ class Zoologico:
             salario= 21.50,
             horario="2:00pm-7:00pm",
             curp= "DAG99",
-            rol=Rol.VETERINARIO
+            #rol=Rol.VETERINARIO
             )
         self.Lista_empleados.append(empleado2)
         
-        empleado3 = Empleado (
+        empleado3 = Mantenimiento (
             nombre="Dennise",
             apellido= "Anchoa",
             fecha_nacimiento= datetime(1990,3,15),
@@ -71,7 +71,7 @@ class Zoologico:
             salario= 50.50,
             horario="7:30am-8:00pm",
             curp= "DEAN90",
-            rol=Rol.MANTENIMIENTO
+            #rol=Rol.MANTENIMIENTO
             )
         self.Lista_empleados.append(empleado3)
     
@@ -112,9 +112,15 @@ class Zoologico:
     
     def registrar_empleado(self, empleado: Empleado):
         self.Lista_empleados.append(empleado)
+        print("\nRegistrado correctamente")
 
     def registrar_visitante(self, visitante: Visitante):
         self.Lista_visitantes.append(visitante)
+        print("\nRegistrado correctamente")
+        
+    def registrar_proceso(self,proceso):
+        self.Lista_proceso.append(proceso)
+        print("Proceso Registrado Correctamente")
 
     def mostrar_empleados(self):
         for empleado in self.Lista_empleados:
@@ -133,7 +139,12 @@ class Zoologico:
             for visitante in visita.Lista_visitantes:
                 print(visitante.mostrar_info())
             print("\n")
-        
+
+    def mostrar_procesos(self):
+        for proceso in self.Lista_proceso:
+            print(proceso.mostrar_info_proceso())
+        print("\n")    
+    
     def mostrar_animales(self):
         for animal in self.lista_animales:
             print(animal.mostrar_info())
@@ -195,71 +206,80 @@ class Zoologico:
 
                     guia = Guia(nombre, apellido, fecha_nacimiento, fecha_ingreso, salario, horario, curp)
                     guia_a_cargo = nombre
-        
-        numero_de_niños = 0
-        numero_de_adultos = 0
-        costo_boleto_adulto = 0
-        costo_boleto_niño = 0
-        costo_total = 0
-
-        cantidad_visitantes_en_visita = int(input("Ingresa la cantidad de los visitanes: ")) 
-
-
-        for cantidad in range(cantidad_visitantes_en_visita):
-            print("Ingresa curp del visitante numero", cantidad+1, ": ")
-            curp_visitantes = input()
-            for visitante in self.Lista_visitantes:
-                if curp_visitantes == visitante.curp:
-                    nombre_visitante = visitante.nombre
-                    apellido_visitante = visitante.apellido
-                    fecha_nacimiento_visitante = visitante.fecha_nacimiento
-                    curp_visitantes = visitante.curp
-                    numero_visitas_visitante = visitante.numero_visitas
-                    fecha_registro_visitante = visitante.fecha_registro
-                    
-                    visitante = Visitante(nombre=nombre_visitante, apellido = apellido_visitante, fecha_nacimiento = fecha_nacimiento_visitante, curp=curp_visitantes, numero_visitas=numero_visitas_visitante ,fecha_registro=fecha_registro_visitante)
-                    #visita.Lista_visitantes.append(visitante)
-                    self.Lista_visitantes_de_visita.append(visitante)
-                    numero_visitas_visitante +=1
-
-                    print("Visitante registrado NUMERO ", (cantidad+1),"\n" )
-                    
-                    año_visitante = fecha_nacimiento_visitante.year
-                    
-                    if año_visitante >= 2012: #comparacion de año 
-                        #visitante es niño
-                        numero_de_niños += 1
-                        costo_boleto_niño = 50
                         
-                        if numero_visitas_visitante != 1 and (numero_visitas_visitante-1) % 5 == 0:
-                            costo_boleto_niño = numero_de_niños*costo_boleto_niño*0.8
-                            
-                        else:
-                            costo_boleto_niño = numero_de_niños*costo_boleto_niño
-                    else:
-                        numero_de_adultos += 1
-                        costo_boleto_adulto= 100
-                        if (numero_visitas_visitante-1) % 5 == 0:
-                            costo_boleto_adulto = numero_de_adultos*costo_boleto_adulto*0.8
-                        else:
-                            costo_boleto_adulto = numero_de_adultos*costo_boleto_adulto
-                        
-        costo_total = costo_boleto_adulto+costo_boleto_niño
-        print("COSTO ADULTO: ", costo_boleto_adulto)      
-        print("COSTO NIÑO: ", costo_boleto_niño)      
-        print("COSTO TOTAL: ", costo_total)      
-        print("NIÑOS:", numero_de_niños)      
-        print("ADULTOS:", numero_de_adultos)      
+                    numero_de_niños = 0
+                    numero_de_adultos = 0
+                    costo_boleto_adulto = 0
+                    costo_boleto_niño = 0
+                    costo_total = 0
 
-        fecha_visita = datetime.now()
-        visita = Visita(guia_acargo=guia_a_cargo, cantidad_niños=numero_de_niños, cantidad_adultos=numero_de_adultos, Lista_visitantes=self.Lista_visitantes_de_visita, costo_total= costo_total, fecha_visita=fecha_visita) 
-        self.Lista_visitas.append(visita)
-        self.Lista_visitantes_de_visita = []
-        
+                    cantidad_visitantes_en_visita = int(input("Ingresa la cantidad de los visitanes: ")) 
 
+
+                    for cantidad in range(cantidad_visitantes_en_visita):
+                        print("Ingresa curp del visitante numero", cantidad+1, ": ")
+                        curp_visitantes = input("Curp: ")
+                        for visitante in self.Lista_visitantes:
+                            if curp_visitantes == visitante.curp:
+                                nombre_visitante = visitante.nombre
+                                apellido_visitante = visitante.apellido
+                                fecha_nacimiento_visitante = visitante.fecha_nacimiento
+                                curp_visitantes = visitante.curp
+                                numero_visitas_visitante = visitante.numero_visitas
+                                fecha_registro_visitante = visitante.fecha_registro
+                                
+                                visitante = Visitante(nombre=nombre_visitante, apellido = apellido_visitante, fecha_nacimiento = fecha_nacimiento_visitante, curp=curp_visitantes, numero_visitas=numero_visitas_visitante ,fecha_registro=fecha_registro_visitante)
+                                #visita.Lista_visitantes.append(visitante)
+                                self.Lista_visitantes_de_visita.append(visitante)
+                                numero_visitas_visitante +=1
+
+                                print("Visitante registrado NUMERO ", (cantidad+1),"\n" )
+                                
+                                año_visitante = fecha_nacimiento_visitante.year
+                                
+                                if año_visitante >= 2012: #comparacion de año 
+                                    #visitante es niño
+                                    numero_de_niños += 1
+                                    costo_boleto_niño = 50
+                                    
+                                    if numero_visitas_visitante != 1 and (numero_visitas_visitante-1) % 5 == 0:
+                                        costo_boleto_niño = numero_de_niños*costo_boleto_niño*0.8
+                                        
+                                    else:
+                                        costo_boleto_niño = numero_de_niños*costo_boleto_niño
+                                else:
+                                    numero_de_adultos += 1
+                                    costo_boleto_adulto= 100
+                                    if (numero_visitas_visitante-1) % 5 == 0:
+                                        costo_boleto_adulto = numero_de_adultos*costo_boleto_adulto*0.8
+                                    else:
+                                        costo_boleto_adulto = numero_de_adultos*costo_boleto_adulto
+                                        
+                                costo_total = costo_boleto_adulto+costo_boleto_niño
+                                print("COSTO ADULTO: ", costo_boleto_adulto)      
+                                print("COSTO NIÑO: ", costo_boleto_niño)      
+                                print("COSTO TOTAL: ", costo_total)      
+                                print("NIÑOS:", numero_de_niños)      
+                                print("ADULTOS:", numero_de_adultos)      
+
+                                fecha_visita = datetime.now()
+                                visita = Visita(guia_acargo=guia_a_cargo, cantidad_niños=numero_de_niños, cantidad_adultos=numero_de_adultos, Lista_visitantes=self.Lista_visitantes_de_visita, costo_total= costo_total, fecha_visita=fecha_visita) 
+                                #self.Lista_visitas.append(visita)
+                                if (cantidad+1) == cantidad_visitantes_en_visita:
+                                    self.Lista_visitas.append(visita)
+                                    print("Visita registrada correctamente")
+                                    self.Lista_visitantes_de_visita = []
+                                    break
+                            else:
+                                print("Visitante no encontrado")
+                                
+                else:
+                    print("Empleado no es guia")
+                
+        print("Saliendo del sistema")
     
     def generar_id(self, especie:str, ano_nacimiento: int):
-        id = f"AN,{especie[2:]},{ano_nacimiento}"
+        id = f"AN{especie[2:]}{ano_nacimiento}"
         return id
         
     def validacion_visitas(self):
@@ -272,6 +292,29 @@ class Zoologico:
             return empleado
         return None
     
+    def validacion_procesos(self):
+        for proceso in self.Lista_proceso:
+            return proceso
+        return None
+    
+    def buscar_empleado_mantenimeinto(self,curp_empleado):
+        for empleado in self.Lista_empleados:
+            if curp_empleado == empleado.curp:
+                if empleado.rol == Rol.MANTENIMIENTO:
+                    print("Empleado encontrado: ", empleado.nombre )
+                    return empleado.nombre
+        return None
+
+    def buscar_animal(self,id_animal):
+        for animal in self.lista_animales:
+            if id_animal == animal.id:
+                    print("Animal encontrado:", animal.nombre, animal.especie )
+                    return animal
+        return None 
+    
+            
+
+
     def validacion_visitantes(self):
         for visitante in self.Lista_visitantes:
             return visitante
@@ -432,10 +475,4 @@ class Zoologico:
                 # curp: str
         print("No se encontro animal con ese Id")
         
-        
-    def registrar_proceso(self,empleado, proceso):
-        if isinstance(empleado, Mantenimiento):
-            self.Lista_proceso.append(proceso)
-            print("Proceso Registrado Correctamente")
-        else:
-            print("No hay empleados de Mantenimiento")
+

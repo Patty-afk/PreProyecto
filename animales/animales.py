@@ -32,7 +32,7 @@ class Animal:
         
     
     def mostrar_info(self):
-        info = f"ID: {self.id} Tipo: {self.tipo_animal} Especie: {self.especie} Nombre: {self.nombre} Fecha de llegada: {self.fecha_llegada} Alimentacion: {self.tipo_alimentacion} Frecuencia de alimentacion: {self.frecuencia_alimentacio} Peso: {self.peso} Vacunas: {self.cuenta_vacunas}"
+        info = f"ID:{self.id}, Tipo: {self.tipo_animal}, Especie: {self.especie}, Nombre: {self.nombre}, Fecha de llegada: {self.fecha_llegada}, Alimentacion: {self.tipo_alimentacion}, Frecuencia de alimentacion: {self.frecuencia_alimentacio}, Peso: {self.peso}, Vacunas: {self.cuenta_vacunas}"
         return info
         
          

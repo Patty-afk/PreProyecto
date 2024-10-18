@@ -24,5 +24,5 @@ class Empleado:
         
         
         def mostrar_info(self):
-         info = f"Nombre: {self.nombre} {self.apellido}, Fecha De Nacimiento: {self.fecha_nacimiento}, Fecha de Ingreso: {self.fecha_ingreso}, Salario: {self.salario}, Curp: {self.curp}, Rol: {self.rol}"
+         info = f"Nombre: {self.nombre} {self.apellido}, Fecha De Nacimiento: {self.fecha_nacimiento}, Fecha de Ingreso: {self.fecha_ingreso}, Salario: {self.salario},Horario: {self.horario}, Curp: {self.curp}, Rol: {self.rol}"
          return info
