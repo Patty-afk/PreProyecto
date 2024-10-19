@@ -115,18 +115,24 @@ class Menu:
             if opcion == "4":
                 print("Registrar Director")
                 nombre = input("Ingresa el nombre: ")
-                apellido = input("Ingresa el apelllido: ")
-                dia_nacimiento = int(input("Ingresa el dia de nacimiento: "))
+                apellido = input("Ingresa el apellido: ")
+                dia_nacimiento = int(input("Ingresa el día de nacimiento: "))
                 mes_nacimiento = int(input("Ingresa el mes de nacimiento: "))
                 ano_nacimiento = int(input("Ingresa el año de nacimiento: "))
-                fecha_nacimiento = datetime(ano_nacimiento,mes_nacimiento,dia_nacimiento)
+                fecha_nacimiento = datetime(ano_nacimiento, mes_nacimiento, dia_nacimiento)
                 salario = float(input("Ingresa el salario: "))
                 horario = input("Ingresa el horario: ")
                 curp = input("Ingresa la curp: ")
+                usuario = input("Ingresa el nombre de usuario: ")
+                contrasena = input("Ingresa la contraseña: ")
                 fecha_registro = datetime.now()       
-                
-                director = Director(nombre=nombre, apellido=apellido, fecha_nacimiento=fecha_nacimiento,fecha_ingreso=fecha_registro, salario=salario, horario=horario, curp=curp)
+
+                director = Director(usuario=usuario, contrasena=contrasena, nombre=nombre, apellido=apellido, 
+                                    fecha_nacimiento=fecha_nacimiento, fecha_ingreso=fecha_registro, 
+                                    salario=salario, horario=horario, curp=curp)
                 self.zoologico.registrar_empleado(director)
+
+                print("\nRegistrado correctamente")
 
             elif opcion == "5":
                 zoologico: Zoologico = Zoologico()
